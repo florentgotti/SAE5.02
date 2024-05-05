@@ -1,0 +1,51 @@
+---
+- name: Installation de Docker sur Ubuntu
+  hosts: localhost
+  remote_user : user
+  become: yes
+
+  tasks:
+    - name: Mise à jour des paquets
+      apt:
+        update_cache: yes
+
+    - name: Installation de dépendances nécessaires à apt
+      apt:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - apt-transport-https
+        - ca-certificates
+        - curl
+        - gnupg-agent
+        - software-properties-common
+
+    - name: Ajout de la clé GPG officielle de Docker
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Ajout du dépôt Docker aux sources APT
+      apt_repository:
+        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
+        state: present
+
+    - name: Mise à jour des paquets après ajout du dépôt Docker
+      apt:
+        update_cache: yes
+
+    - name: Installation de Docker
+      apt:
+        name: docker-ce
+        state: present
+
+    - name: Installation de Docker-compose
+      apt:
+        name: docker-compose
+        state: present
+
+    - name: Démarrage et activation du service Docker
+      service:
+        name: docker
+        state: started
+        enabled: yes
