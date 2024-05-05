@@ -1,0 +1,3 @@
+docker start b42b399d2d24fc68e9852882110e937f03a023c7667ca5e7ec33ce03552bcbea
+
+docker exec -it ollama ollama run llama2
