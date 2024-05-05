@@ -12,4 +12,4 @@ apt update
 # Installation de Docker à partir d'Ansible
 ansible-galaxy collection install community.docker
 
-echo "L'installation de Docker est terminée."
+echo "L'installation de Docker1 est terminée."
