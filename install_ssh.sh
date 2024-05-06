@@ -15,4 +15,4 @@ systemctl start ssh
 systemctl status ssh
 
 #Création d'une clef ssh
-ssh-keygen -t rsa -b 4096 -C florent.gotti@etu.univ-st-etienne.fr -y
+ssh-keygen -t rsa -b 4096 -C mail@exemple.fr -y
